@@ -1,0 +1,28 @@
+
+CREATE TABLE `a1` (
+   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+   `num` char(1) NOT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS  a2 LIKE a2;
+CREATE TABLE IF NOT EXISTS  a3 LIKE a3;
+
+
+
+DROP PROCEDURE test_insert ;
+DELIMITER ;;
+CREATE PROCEDURE test_insert ()
+BEGIN
+
+DECLARE i INT DEFAULT 1;
+
+WHILE i<10
+DO
+INSERT INTO a5 (id, num) VALUES (i, 'num');
+SET i=i+1;
+END WHILE ;
+
+END;;
+
+CALL test_insert();

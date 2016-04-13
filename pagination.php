@@ -90,24 +90,20 @@ function getData($page, $pagesize) {
 		if(!$db->table_exists($tablename)) 
 			break;
 
-		if($page == 1) {
-			$offset = 0;
-		} else if($page > 1 && $offset_lock){
+		$offset = 0;
+		if($page > 1 && $offset_lock){
 			$_ctt = $ctt;
 			$ctt += _queryTotal($tablename);
 			
 			if($ctt < $last_count)
 				continue;
 
+			$offset = abs($last_count-$_ctt);
 			if($ctt > $last_count && $i==1) {
 				$offset = $last_count;
-			} else {
-				$offset = abs($last_count-$_ctt);
 			}
 
 			$offset_lock = false;
-		} else {
-			$offset = 0;
 		}
 
 		$limit = max($pagesize-count($data_tmp), 0);
